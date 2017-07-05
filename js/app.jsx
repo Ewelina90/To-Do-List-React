@@ -6,6 +6,21 @@ document.addEventListener('DOMContentLoaded', function(){
     class ToDoList extends React.Component {
 
         render() {
+
+            const toDoList = this.state.toDo.map( (el,index) => {
+                return (
+                    <li key={index}
+                        className={el.done ? 'checked' : 'active'}
+                        onClick={e => this.handleLiClick(index)}>
+                        {el.name}
+                        <span className="close"
+                            onClick={e => this.handleCloseLiClick(e,index)}>
+                            x
+                        </span>
+                    </li>
+                )
+            })
+            
             return (
                 <div className="toDoList">
                     <div className="header">
