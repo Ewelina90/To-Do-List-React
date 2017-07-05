@@ -12,6 +12,46 @@ document.addEventListener('DOMContentLoaded', function(){
                 toDo : [],
             };
         }
+
+        handleInputOnChange = (event) => {
+            this.setState({
+                inputValue : event.target.value,
+            });
+        };
+
+        handleAddBtnClick = (event) => {
+            if(this.state.inputValue.length === 0 || !this.state.inputValue.trim()){
+                console.log('There has to be something To Do? Just type it!');
+            }else{
+                const toDoCopy = this.state.toDo.slice();
+                toDoCopy.push({name: this.state.inputValue, done: false});
+
+                this.setState({
+                    toDo : toDoCopy,
+                    inputValue : '',
+                });
+            }
+        };
+
+        handleLiClick = (index) => {
+            const toDoCopy = this.state.toDo.slice();
+            toDoCopy[index].done = !toDoCopy[index].done;
+
+            this.setState({
+                toDo : toDoCopy,
+            });
+        };
+
+        handleCloseLiClick = (event,index) => {
+            event.stopPropagation();
+            const toDoCopy = this.state.toDo.slice();
+            toDoCopy.splice(index,1);
+            console.log(toDoCopy);
+
+            this.setState({
+                toDo : toDoCopy,
+            });
+        };
         
         render() {
 
