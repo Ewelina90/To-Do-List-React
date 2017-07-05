@@ -9851,8 +9851,6 @@ document.addEventListener('DOMContentLoaded', function () {
             value: function render() {
                 var _this2 = this;
 
-                console.log('renderuje');
-                console.log(this.state.toDo);
                 var toDoList = this.state.toDo.map(function (el, index) {
                     return _react2.default.createElement(
                         'li',
@@ -9872,6 +9870,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         )
                     );
                 });
+
                 return _react2.default.createElement(
                     'div',
                     { className: 'toDoList' },
