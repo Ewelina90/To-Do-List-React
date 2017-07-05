@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
     class ToDoList extends React.Component {
 
+        constructor(props) {
+            super(props);
+            this.state = {
+                inputValue : '',
+                toDo : [],
+            };
+        }
+        
         render() {
 
             const toDoList = this.state.toDo.map( (el,index) => {
@@ -20,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     </li>
                 )
             })
-            
+
             return (
                 <div className="toDoList">
                     <div className="header">
