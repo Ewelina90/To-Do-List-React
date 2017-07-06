@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 inputValue : '',
                 toDo : [],
                 toolTip : 'none',
+                outline : 'none',
             };
         }
 
@@ -18,7 +19,13 @@ document.addEventListener('DOMContentLoaded', function(){
             if(this.state.inputValue.length === 0 || !this.state.inputValue.trim()){
                 this.setState({
                     toolTip : 'block',
+                    outline : ' #FF5722 solid 3px',
                 });
+                this.timeOutId = setTimeout(() => {
+                    this.setState({
+                        toolTip : 'none',
+                    });
+                }, 2200);
 
             }else{
                 const toDoCopy = this.state.toDo.slice();
@@ -32,9 +39,11 @@ document.addEventListener('DOMContentLoaded', function(){
         };
 
         handleInputOnChange = (event) => {
+            clearTimeout(this.timeOutId);
             this.setState({
                 toolTip : 'none',
                 inputValue : event.target.value,
+                outline : 'none',
             });
         };
 
@@ -61,12 +70,15 @@ document.addEventListener('DOMContentLoaded', function(){
             event.stopPropagation();
             const toDoCopy = this.state.toDo.slice();
             toDoCopy.splice(index,1);
-            console.log(toDoCopy);
 
             this.setState({
                 toDo : toDoCopy,
             });
         };
+
+        componentWillUnmount() {
+            clearTimeout(this.timeOutId);
+        }
 
         render() {
 
@@ -91,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         <h4>Just add your tasks for today. </h4>
 
                         <input type='text' placeholder="Text..."
+                            style={{outline: this.state.outline}}
                             value={this.state.inputValue}
                             onChange={this.handleInputOnChange}
                             onKeyPress={this.handleAddOnKeyPress}/>
@@ -98,7 +111,8 @@ document.addEventListener('DOMContentLoaded', function(){
                             onClick={this.handleAddBtnClick}>
                             Add
                         </button>
-                        <div className="infoToolTip" style={{display: this.state.toolTip}}>
+                        <div className="infoToolTip"
+                            style={{display: this.state.toolTip}}>
                             <span className="infoToolTipText">
                                 Sorry, it can't be empty.
                             </span>
