@@ -22,7 +22,7 @@ ul {
 ul li {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 40px;
+    padding: 12px 40px 12px 40px;
     background: #eee;
     font-size: 18px;
     transition: 0.2s;
@@ -30,6 +30,7 @@ ul li {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    word-wrap:break-word;
 }
 
 ul li:nth-child(odd) {
@@ -108,4 +109,35 @@ input {
 
 .addBtn:hover {
     background-color: #bbb;
+}
+
+.infoToolTip {
+    position: relative;
+    left: -38%;
+}
+
+.infoToolTip .infoToolTipText {
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.infoToolTip .infoToolTipText::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
 }

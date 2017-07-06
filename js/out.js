@@ -9801,6 +9801,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             _this.handleInputOnChange = function (event) {
                 _this.setState({
+                    toolTip: 'none',
                     inputValue: event.target.value
                 });
             };
@@ -9837,7 +9838,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             _this.state = {
                 inputValue: '',
-                toDo: []
+                toDo: [],
+                toolTip: 'none'
             };
             return _this;
         }
@@ -9846,7 +9848,9 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'addTask',
             value: function addTask() {
                 if (this.state.inputValue.length === 0 || !this.state.inputValue.trim()) {
-                    console.log('There has to be something To Do? Just type it!');
+                    this.setState({
+                        toolTip: 'block'
+                    });
                 } else {
                     var toDoCopy = this.state.toDo.slice();
                     toDoCopy.push({ name: this.state.inputValue, done: false });
@@ -9907,6 +9911,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             { className: 'addBtn',
                                 onClick: this.handleAddBtnClick },
                             'Add'
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'infoToolTip', style: { display: this.state.toolTip } },
+                            _react2.default.createElement(
+                                'span',
+                                { className: 'infoToolTipText' },
+                                'Sorry, it can\'t be empty.'
+                            )
                         )
                     ),
                     _react2.default.createElement(

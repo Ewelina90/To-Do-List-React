@@ -10,12 +10,16 @@ document.addEventListener('DOMContentLoaded', function(){
             this.state = {
                 inputValue : '',
                 toDo : [],
+                toolTip : 'none',
             };
         }
 
         addTask() {
             if(this.state.inputValue.length === 0 || !this.state.inputValue.trim()){
-                console.log('There has to be something To Do? Just type it!');
+                this.setState({
+                    toolTip : 'block',
+                });
+
             }else{
                 const toDoCopy = this.state.toDo.slice();
                 toDoCopy.push({name: this.state.inputValue, done: false});
@@ -29,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         handleInputOnChange = (event) => {
             this.setState({
+                toolTip : 'none',
                 inputValue : event.target.value,
             });
         };
@@ -84,12 +89,20 @@ document.addEventListener('DOMContentLoaded', function(){
                     <div className="header">
                         <h1>To Do List made in React.js</h1>
                         <h4>Just add your tasks for today. </h4>
+
                         <input type='text' placeholder="Text..."
                             value={this.state.inputValue}
                             onChange={this.handleInputOnChange}
                             onKeyPress={this.handleAddOnKeyPress}/>
                         <button className='addBtn'
-                            onClick={this.handleAddBtnClick}>Add</button>
+                            onClick={this.handleAddBtnClick}>
+                            Add
+                        </button>
+                        <div className="infoToolTip" style={{display: this.state.toolTip}}>
+                            <span className="infoToolTipText">
+                                Sorry, it can't be empty.
+                            </span>
+                        </div>
                     </div>
 
                     <ul>
