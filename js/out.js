@@ -9806,16 +9806,12 @@ document.addEventListener('DOMContentLoaded', function () {
             };
 
             _this.handleAddBtnClick = function (event) {
-                if (_this.state.inputValue.length === 0 || !_this.state.inputValue.trim()) {
-                    console.log('There has to be something To Do? Just type it!');
-                } else {
-                    var toDoCopy = _this.state.toDo.slice();
-                    toDoCopy.push({ name: _this.state.inputValue, done: false });
+                _this.addTask();
+            };
 
-                    _this.setState({
-                        toDo: toDoCopy,
-                        inputValue: ''
-                    });
+            _this.handleAddOnKeyPress = function (event) {
+                if (event.key === 'Enter') {
+                    _this.addTask();
                 }
             };
 
@@ -9847,6 +9843,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         _createClass(ToDoList, [{
+            key: 'addTask',
+            value: function addTask() {
+                if (this.state.inputValue.length === 0 || !this.state.inputValue.trim()) {
+                    console.log('There has to be something To Do? Just type it!');
+                } else {
+                    var toDoCopy = this.state.toDo.slice();
+                    toDoCopy.push({ name: this.state.inputValue, done: false });
+
+                    this.setState({
+                        toDo: toDoCopy,
+                        inputValue: ''
+                    });
+                }
+            }
+        }, {
             key: 'render',
             value: function render() {
                 var _this2 = this;
@@ -9889,7 +9900,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         ),
                         _react2.default.createElement('input', { type: 'text', placeholder: 'Text...',
                             value: this.state.inputValue,
-                            onChange: this.handleInputOnChange }),
+                            onChange: this.handleInputOnChange,
+                            onKeyPress: this.handleAddOnKeyPress }),
                         _react2.default.createElement(
                             'button',
                             { className: 'addBtn',

@@ -13,13 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             };
         }
 
-        handleInputOnChange = (event) => {
-            this.setState({
-                inputValue : event.target.value,
-            });
-        };
-
-        handleAddBtnClick = (event) => {
+        addTask() {
             if(this.state.inputValue.length === 0 || !this.state.inputValue.trim()){
                 console.log('There has to be something To Do? Just type it!');
             }else{
@@ -30,6 +24,22 @@ document.addEventListener('DOMContentLoaded', function(){
                     toDo : toDoCopy,
                     inputValue : '',
                 });
+            }
+        };
+
+        handleInputOnChange = (event) => {
+            this.setState({
+                inputValue : event.target.value,
+            });
+        };
+
+        handleAddBtnClick = (event) => {
+            this.addTask();
+        };
+
+        handleAddOnKeyPress = (event) => {
+            if(event.key === 'Enter'){
+                this.addTask();
             }
         };
 
@@ -52,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 toDo : toDoCopy,
             });
         };
-        
+
         render() {
 
             const toDoList = this.state.toDo.map( (el,index) => {
@@ -76,7 +86,8 @@ document.addEventListener('DOMContentLoaded', function(){
                         <h4>Just add your tasks for today. </h4>
                         <input type='text' placeholder="Text..."
                             value={this.state.inputValue}
-                            onChange={this.handleInputOnChange} />
+                            onChange={this.handleInputOnChange}
+                            onKeyPress={this.handleAddOnKeyPress}/>
                         <button className='addBtn'
                             onClick={this.handleAddBtnClick}>Add</button>
                     </div>
