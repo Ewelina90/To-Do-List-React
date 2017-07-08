@@ -99,6 +99,10 @@ ul li.checked::before {
     clear: both;
 }
 
+h4 {
+    padding-bottom: 30px;
+}
+
 input {
     border: none;
     width: 75%;
