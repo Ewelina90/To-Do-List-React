@@ -9839,7 +9839,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             _this.state = {
                 inputValue: '',
-                toDo: [],
+                toDo: _this.props.toDoDef,
                 toolTip: 'none',
                 outline: 'none'
             };
@@ -9951,7 +9951,28 @@ document.addEventListener('DOMContentLoaded', function () {
         return ToDoList;
     }(_react2.default.Component);
 
-    _reactDom2.default.render(_react2.default.createElement(ToDoList, null), document.getElementById('app'));
+    var App = function (_React$Component2) {
+        _inherits(App, _React$Component2);
+
+        function App() {
+            _classCallCheck(this, App);
+
+            return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        }
+
+        _createClass(App, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(ToDoList, { toDoDef: this.props.toDoDef });
+            }
+        }]);
+
+        return App;
+    }(_react2.default.Component);
+
+    var toDoDef = [{ name: 'Pay bills', done: false }, { name: 'Buy groceries', done: true }, { name: 'Wash car', done: false }, { name: 'Get laundry', done: false }];
+
+    _reactDom2.default.render(_react2.default.createElement(App, { toDoDef: toDoDef }), document.getElementById('app'));
 });
 
 /***/ }),

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
             super(props);
             this.state = {
                 inputValue : '',
-                toDo : [],
+                toDo : this.props.toDoDef,
                 toolTip : 'none',
                 outline : 'none',
             };
@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         render() {
-
             const toDoList = this.state.toDo.map( (el,index) => {
                 return (
                     <li key={index}
@@ -107,10 +106,12 @@ document.addEventListener('DOMContentLoaded', function(){
                             value={this.state.inputValue}
                             onChange={this.handleInputOnChange}
                             onKeyPress={this.handleAddOnKeyPress}/>
+
                         <button className='addBtn'
                             onClick={this.handleAddBtnClick}>
                             Add
                         </button>
+
                         <div className="infoToolTip"
                             style={{display: this.state.toolTip}}>
                             <span className="infoToolTipText">
@@ -126,8 +127,24 @@ document.addEventListener('DOMContentLoaded', function(){
             )
         }
     }
+
+    class App extends React.Component {
+        render() {
+            return(
+                <ToDoList  toDoDef={this.props.toDoDef} />
+            )
+        }
+    }
+
+    const toDoDef = [
+        {name:'Pay bills', done: false},
+        {name: 'Buy groceries', done: true},
+        {name: 'Wash car', done: false},
+        {name: 'Get laundry', done: false},
+    ];
+
     ReactDOM.render(
-        <ToDoList />,
+        <App toDoDef={toDoDef}/>,
         document.getElementById('app')
     );
 });
